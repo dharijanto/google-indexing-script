@@ -64,8 +64,9 @@ export async function getSites(accessToken: string) {
     },
   });
 
+  console.log(`sitesResponse.status=${sitesResponse.status}`)
   if (sitesResponse.status === 403) {
-    console.error("🔐 This service account doesn't have access to any sites.");
+    console.error("🔐 Thi`s service account doesn't have access to any sites.");
     return [];
   }
 
@@ -87,6 +88,7 @@ export async function getSites(accessToken: string) {
  */
 export async function checkSiteUrl(accessToken: string, siteUrl: string) {
   const sites = await getSites(accessToken);
+  console.log(`sites=${sites}`)
   let formattedUrls: string[] = [];
 
   // Convert the site URL into all possible formats
@@ -108,6 +110,8 @@ export async function checkSiteUrl(accessToken: string, siteUrl: string) {
     process.exit(1);
   }
 
+  console.log(`formattedUrls=${formattedUrls}`)
+
   // Check if any of the formatted URLs are accessible
   for (const formattedUrl of formattedUrls) {
     if (sites.includes(formattedUrl)) {
@@ -116,7 +120,7 @@ export async function checkSiteUrl(accessToken: string, siteUrl: string) {
   }
 
   // If none of the formatted URLs are accessible
-  console.error("❌ This service account doesn't have access to this site.");
+  console.error("❌ !!!This service account doesn't have access to this site.");
   console.error("");
   process.exit(1);
 }
@@ -207,6 +211,7 @@ export function getEmojiForStatus(status: Status) {
  * @returns The status of the request.
  */
 export async function getPublishMetadata(accessToken: string, url: string, options?: { retriesOnRateLimit: number }) {
+  console.log(`url=${url}`)
   const response = await fetchRetry(
     `https://indexing.googleapis.com/v3/urlNotifications/metadata?url=${encodeURIComponent(url)}`,
     {

@@ -61,7 +61,7 @@ export const index = async (input: string = process.argv[2], options: IndexOptio
 
   const accessToken = await getAccessToken(options.client_email, options.private_key, options.path);
   let siteUrl = convertToSiteUrl(input);
-  console.log(`🔎 Processing site: ${siteUrl}`);
+  console.log(`🔎 Processing site!!!: ${siteUrl}`);
   const cachePath = path.join(".cache", `${convertToFilePath(siteUrl)}.json`);
 
   if (!accessToken) {
@@ -69,8 +69,10 @@ export const index = async (input: string = process.argv[2], options: IndexOptio
     console.error("");
     process.exit(1);
   }
+  // console.log(`accessToken: ${accessToken}`)
 
   siteUrl = await checkSiteUrl(accessToken, siteUrl);
+  console.log(`siteUrl: ${siteUrl}`);
 
   const [sitemaps, pages] = await getSitemapPages(accessToken, siteUrl);
 

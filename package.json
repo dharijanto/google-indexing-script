@@ -21,6 +21,7 @@
   "scripts": {
     "index": "ts-node ./src/cli.ts",
     "build": "tsup",
+    "runts": "ts-node src/cli.ts https://hedonaherbal.com",
     "dev": "tsup --watch",
     "changeset": "changeset",
     "version": "changeset version",
